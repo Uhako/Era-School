@@ -1,0 +1,33 @@
+{
+	"chara_idx": 0,
+	"chara_firstname": "遥",
+	"chara_lastname": "長嶋",
+	"gender": 1,
+	"chara_skill": [
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	"chara_sexuallevel": [
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0
+	],
+	"chara_genitalsize": [
+		100,
+		25,
+		80,
+		18,
+		2
+	]
+}

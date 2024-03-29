@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://c57rse8eyr8bg"]
+
+[ext_resource type="PackedScene" uid="uid://dkgxrabveixvd" path="res://Map/Map.tscn" id="1_cqyjw"]
+[ext_resource type="JSON" path="res://Datas/characters/character00.json" id="1_hkpd3"]
+[ext_resource type="JSON" path="res://Datas/characters/namelist.json" id="2_4ai8r"]
+[ext_resource type="Theme" uid="uid://bg20xa27a51sr" path="res://Datas/style/startmenu.theme" id="2_4ur2p"]
+[ext_resource type="PackedScene" uid="uid://cuxc67yg4x6tk" path="res://Datas/menu_tscn/newgame_charaedit.tscn" id="3_3eon6"]
+
+[sub_resource type="GDScript" id="GDScript_ofeyv"]
+resource_name = "Gamecore"
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _gamestart() -> void:
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_4uh3b"]
+script/source = "extends PanelContainer
+@export var startmenu:Container
+@export_group(\"新游戏\")
+@export var charaedit:PackedScene
+@export_group(\"读取存档\")
+var Newgame_charaedit:Container
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Newgame_charaedit = get_node_or_null(\"Newgame_charaedit\")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _newgame() -> void:
+	startmenu.visible = false
+	if Newgame_charaedit == null:
+		add_child(charaedit.instantiate())
+		Newgame_charaedit = get_node(\"Newgame_charaedit\")
+	Newgame_charaedit.menu_back.connect(_on_charaedit_cancel)
+	Newgame_charaedit.menu_continue.connect(_on_charaedit_continue)
+func _on_charaedit_cancel() -> void:
+	Newgame_charaedit.queue_free()
+	startmenu.visible = true
+func _on_charaedit_continue():
+	Newgame_charaedit.queue_free()
+"
+
+[node name="Game" type="Node"]
+script = SubResource("GDScript_ofeyv")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("character00", "namelist", "startmenu_charaedit"), [ExtResource("1_hkpd3"), ExtResource("2_4ai8r"), ExtResource("3_3eon6")]]
+
+[node name="Maps" parent="." instance=ExtResource("1_cqyjw")]
+
+[node name="UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menucontainer" type="PanelContainer" parent="UI" node_paths=PackedStringArray("startmenu")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_4uh3b")
+startmenu = NodePath("StartMenu")
+charaedit = ExtResource("3_3eon6")
+
+[node name="StartMenu" type="VSplitContainer" parent="UI/Menucontainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_4ur2p")
+dragger_visibility = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Menucontainer/StartMenu"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 35
+
+[node name="Label" type="Label" parent="UI/Menucontainer/StartMenu/MarginContainer"]
+layout_mode = 2
+text = "Era NTR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menucontainer/StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "初めから"
+
+[node name="Button2" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "ロード"
+
+[node name="Button3" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "チャラエジィット"
+
+[node name="Button4" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "設定"
+
+[node name="Button5" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "ゲッム終了"
+
+[connection signal="pressed" from="UI/Menucontainer/StartMenu/VBoxContainer/Button" to="UI/Menucontainer" method="_newgame"]

@@ -1,0 +1,252 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2govn0bjqhy4"]
+
+[ext_resource type="Script" path="res://Datas/style/genitalpointadding.gd" id="1_a1jov"]
+
+[node name="角色技能加点" type="VBoxContainer" node_paths=PackedStringArray("UI_points", "UI_dataname", "UI_datalevel", "UI_plusbutton", "UI_subbutton")]
+script = ExtResource("1_a1jov")
+base_points = 2.0
+base_datasize = 5
+base_dataname = Array[String](["陰茎の長さ", "陰茎周径", "膣の深さ", "膣内径", "胸のサイス"])
+base_datalevel = Array[float]([10.0, 2.5, 8.0, 1.8, 2.0])
+UI_points = NodePath("HSplitContainer/points")
+UI_dataname = [NodePath("MarginContainer/VBoxContainer/data1/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/data2/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/data3/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/data4/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/data5/HSplitContainer/dataname")]
+UI_datalevel = [NodePath("MarginContainer/VBoxContainer/data1/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/data2/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/data3/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/data4/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/data5/HSplitContainer/datalevel")]
+UI_plusbutton = [NodePath("MarginContainer/VBoxContainer/data1/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/data2/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/data3/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/data4/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/data5/HSplitContainer2/+")]
+UI_subbutton = [NodePath("MarginContainer/VBoxContainer/data1/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/data2/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/data3/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/data4/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/data5/HSplitContainer2/-")]
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="skillkind" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+text = "性器設定"
+
+[node name="points" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "残り：10"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="data1" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data1"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/data1/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/data1/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data1"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/data1/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/data1/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="data2" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data2"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/data2/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/data2/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data2"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/data2/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/data2/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="data3" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data3"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/data3/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/data3/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data3"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/data3/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/data3/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="data4" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data4"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/data4/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/data4/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data4"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/data4/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/data4/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="data5" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data5"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/data5/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/data5/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/data5"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/data5/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/data5/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data1/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data1/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data2/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data2/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data3/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data3/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data4/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data4/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data5/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [4]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/data5/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [4]]

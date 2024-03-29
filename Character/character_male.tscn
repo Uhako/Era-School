@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwqcrc4v7h2ul"]
+
+[ext_resource type="Texture2D" uid="uid://m0oifw6c7tcx" path="res://Character/Males.png" id="1_ggllq"]
+[ext_resource type="Script" path="res://Character/charabase.gd" id="1_m7c3d"]
+
+[node name="Character" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Character" type="Node" parent="."]
+script = ExtResource("1_m7c3d")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+input_pickable = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_ggllq")
+offset = Vector2(0, -80)
+hframes = 3
+vframes = 3
+region_rect = Rect2(0, 0, 216, 498)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(0, -80)
+polygon = PackedVector2Array(-36, 47, 0, 81, 36, 47)

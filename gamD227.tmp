@@ -1,0 +1,267 @@
+[gd_scene load_steps=11 format=3 uid="uid://c57rse8eyr8bg"]
+
+[ext_resource type="PackedScene" uid="uid://dkgxrabveixvd" path="res://Map/Map.tscn" id="1_cqyjw"]
+[ext_resource type="JSON" path="res://Datas/namelist.json" id="2_4ai8r"]
+[ext_resource type="Theme" uid="uid://bg20xa27a51sr" path="res://Controlstyle/startmenu.theme" id="2_4ur2p"]
+[ext_resource type="Theme" uid="uid://cco5x4pyvfhlx" path="res://Controlstyle/info_panel_edit.tres" id="4_6v73i"]
+[ext_resource type="Texture2D" uid="uid://7o1bqriyq4ff" path="res://Character/defaultchara.png" id="5_dww3v"]
+[ext_resource type="Texture2D" uid="uid://c18wv14183l8t" path="res://Character/male1.png" id="6_w2ots"]
+[ext_resource type="Texture2D" uid="uid://1tb3bsutueaj" path="res://Character/female1.png" id="7_fxguu"]
+
+[sub_resource type="GDScript" id="GDScript_ofeyv"]
+resource_name = "Gamecore"
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _gamestart() -> void:
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id="GDScript_4uh3b"]
+script/source = "extends PanelContainer
+@export var startmenu:Container
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _newgame() -> void:
+	startmenu.visible = false
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_vh6d5"]
+script/source = "extends LineEdit
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _random_pressed() -> void:
+	#if 
+	#preload(\"res://Datas/namelist.json\").data.get()
+	pass"
+
+[node name="Game" type="Node"]
+script = SubResource("GDScript_ofeyv")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("namelist"), [ExtResource("2_4ai8r")]]
+
+[node name="Maps" parent="." instance=ExtResource("1_cqyjw")]
+visible = false
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menucontainer" type="PanelContainer" parent="UI" node_paths=PackedStringArray("startmenu")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_4uh3b")
+startmenu = NodePath("StartMenu")
+
+[node name="StartMenu" type="VSplitContainer" parent="UI/Menucontainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_4ur2p")
+dragger_visibility = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Menucontainer/StartMenu"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 35
+
+[node name="Label" type="Label" parent="UI/Menucontainer/StartMenu/MarginContainer"]
+layout_mode = 2
+text = "Era NTR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menucontainer/StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "初めから"
+
+[node name="Button2" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "ロード"
+
+[node name="Button3" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "チャラエジィット"
+
+[node name="Button4" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "設定"
+
+[node name="Button5" type="Button" parent="UI/Menucontainer/StartMenu/VBoxContainer"]
+layout_mode = 2
+text = "ゲッム終了"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Menucontainer"]
+layout_mode = 2
+theme = ExtResource("4_6v73i")
+
+[node name="GridContainer" type="GridContainer" parent="UI/Menucontainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menucontainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_dww3v")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の名前は？"
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = SubResource("GDScript_vh6d5")
+
+[node name="Button" type="Button" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "ランダム"
+
+[node name="Label2" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の苗字は？"
+vertical_alignment = 1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "ランダム"
+
+[node name="Label3" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の性別は？"
+vertical_alignment = 1
+
+[node name="TabBar" type="TabBar" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+tab_count = 2
+tab_alignment = 1
+scroll_to_selected = false
+tab_0/title = "男"
+tab_0/icon = ExtResource("6_w2ots")
+tab_1/title = "女"
+tab_1/icon = ExtResource("7_fxguu")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Menucontainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/Menucontainer/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(151, 151)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "主人公の名前は？"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "ランダム"
+
+[node name="Label2" type="Label" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "主人公の名前は？"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="LineEdit" type="LineEdit" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3/HSplitContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer3/HSplitContainer2"]
+layout_mode = 2
+text = "ランダム"
+
+[connection signal="pressed" from="UI/Menucontainer/StartMenu/VBoxContainer/Button" to="UI/Menucontainer" method="_newgame"]
+[connection signal="pressed" from="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer/Button" to="UI/Menucontainer/MarginContainer/GridContainer/VBoxContainer/HSplitContainer/LineEdit" method="_random_pressed"]

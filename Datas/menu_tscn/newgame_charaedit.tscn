@@ -1,0 +1,326 @@
+[gd_scene load_steps=13 format=3 uid="uid://cuxc67yg4x6tk"]
+
+[ext_resource type="Theme" uid="uid://cco5x4pyvfhlx" path="res://Datas/style/info_panel_edit.tres" id="1_twe5q"]
+[ext_resource type="Texture2D" uid="uid://dq5o0aackrkf2" path="res://Datas/style/texture/InfoPanel.png" id="2_vmnrt"]
+[ext_resource type="Texture2D" uid="uid://c4vx4o46smi8x" path="res://Datas/img/female/character01_nude.png" id="3_37pil"]
+[ext_resource type="JSON" path="res://Datas/characters/namelist.json" id="4_1mgfb"]
+[ext_resource type="Texture2D" uid="uid://1tb3bsutueaj" path="res://Character/female1.png" id="5_oal0x"]
+[ext_resource type="Texture2D" uid="uid://c18wv14183l8t" path="res://Character/male1.png" id="6_7wx7r"]
+[ext_resource type="PackedScene" uid="uid://b34axgpcvtplq" path="res://Datas/menu_tscn/charaskill_pointadding.tscn" id="7_nj5yj"]
+[ext_resource type="PackedScene" uid="uid://d2govn0bjqhy4" path="res://Datas/menu_tscn/genital_pointadding.tscn" id="8_7m8hu"]
+[ext_resource type="PackedScene" uid="uid://36oqtextnbe" path="res://Datas/menu_tscn/sexualskill_pointadding.tscn" id="9_vqki4"]
+
+[sub_resource type="GDScript" id="GDScript_hk3vj"]
+resource_name = "startmenu_charaedit"
+script/source = "extends MarginContainer
+@export var chara_firstname:LineEdit
+@export var chara_lastname:LineEdit
+@export var gender:TabBar
+@export var chara_img:TextureRect
+@export var chara_skill:VBoxContainer
+@export var chara_genitalsize:VBoxContainer
+@export var chara_sexuallevel:VBoxContainer
+@export var savenotification:Label
+@export var confirmfailurenotification:Label
+signal menu_back
+signal menu_continue
+
+
+func _process(delta: float) -> void:
+	if savenotification.self_modulate.a!=0:
+		savenotification.self_modulate.a-=delta
+	elif savenotification.visible!=false:
+		savenotification.visible=false
+		
+	if confirmfailurenotification.self_modulate.a!=0:
+		confirmfailurenotification.self_modulate.a-=delta
+	elif confirmfailurenotification.visible!=false:
+		confirmfailurenotification.visible=false
+func _on_charaedit_save() -> void:
+	savenotification.visible = true
+	savenotification.self_modulate.a = 1
+	
+	charadata_savetojson()
+	
+func _on_cancel() -> void:
+	emit_signal(\"menu_back\")
+
+
+#region 人物数据保存为json
+func charadata_savetojson():
+	var data_to_send = {
+		\"chara_idx\":0,
+		\"chara_firstname\":chara_firstname.text,
+		\"chara_lastname\":chara_lastname.text,
+		\"gender\":gender.current_tab,
+		\"chara_skill\":chara_skill.base_datalevel,
+		\"chara_sexuallevel\":chara_sexuallevel.base_datalevel,
+		\"chara_genitalsize\":chara_genitalsize.base_datalevel
+	}
+	var playerjson = JSON.new()
+	playerjson.data = data_to_send
+	ResourceSaver.save(playerjson,\"res://Datas/characters/player.json\")
+#endregion
+
+func _on_confirm() -> void:
+	chara_firstname.check()
+	emit_signal(\"menu_continue\")
+"
+
+[sub_resource type="GDScript" id="GDScript_vh6d5"]
+script/source = "extends LineEdit
+@export var gender:TabBar
+@export var namelist:JSON
+var ischecking:bool
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+func check():
+	pass
+
+
+func _random_pressed() -> void:
+	if gender.current_tab == 0:
+		text = namelist.data.女性名字.pick_random()
+	else :
+		text = namelist.data.男性名字.pick_random()
+"
+
+[sub_resource type="GDScript" id="GDScript_fad8w"]
+script/source = "extends LineEdit
+@export var namelist:JSON
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _random_pressed() -> void:
+	text = namelist.data.姓氏.pick_random()
+"
+
+[node name="Newgame_charaedit" type="MarginContainer" node_paths=PackedStringArray("chara_firstname", "chara_lastname", "gender", "chara_img", "chara_skill", "chara_genitalsize", "chara_sexuallevel", "savenotification", "confirmfailurenotification")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_twe5q")
+script = SubResource("GDScript_hk3vj")
+chara_firstname = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer/firstnameEdit")
+chara_lastname = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer2/lastnameEdit")
+gender = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/gender")
+chara_img = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/charaimg")
+chara_skill = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2/VBoxContainer/角色技能")
+chara_genitalsize = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2/VBoxContainer/性器设定")
+chara_sexuallevel = NodePath("MarginContainer/VSplitContainer/HBoxContainer/PanelContainer3/VBoxContainer/感度设定")
+savenotification = NodePath("MarginContainer/VSplitContainer/HBoxContainer2/savenotification")
+confirmfailurenotification = NodePath("MarginContainer/VSplitContainer/HBoxContainer2/confirmfailurenotification")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(870, 580)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_vmnrt")
+region_rect = Rect2(0, 0, 500, 500)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(870, 580)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="charaimg" type="TextureRect" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+texture = ExtResource("3_37pil")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="imgedit" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "imgedit"
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の名前は？"
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="firstnameEdit" type="LineEdit" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ここで入力"
+script = SubResource("GDScript_vh6d5")
+namelist = ExtResource("4_1mgfb")
+
+[node name="Button" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "ランダム"
+
+[node name="Label2" type="Label" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の苗字は？"
+vertical_alignment = 1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="lastnameEdit" type="LineEdit" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "長嶋"
+placeholder_text = "ここで入力"
+script = SubResource("GDScript_fad8w")
+namelist = ExtResource("4_1mgfb")
+
+[node name="Button" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "ランダム"
+
+[node name="Label3" type="Label" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "主人公の性別は？"
+vertical_alignment = 1
+
+[node name="gender" type="TabBar" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+tab_count = 2
+current_tab = 1
+tab_alignment = 1
+tab_0/title = "女"
+tab_0/icon = ExtResource("5_oal0x")
+tab_1/title = "男"
+tab_1/icon = ExtResource("6_7wx7r")
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="角色技能" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2/VBoxContainer" instance=ExtResource("7_nj5yj")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="性器设定" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer2/VBoxContainer" instance=ExtResource("8_7m8hu")]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="感度设定" parent="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer3/VBoxContainer" instance=ExtResource("9_vqki4")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="カンセル" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+text = "カンセル"
+
+[node name="savenotification" type="Label" parent="MarginContainer/VSplitContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "セーブしました"
+vertical_alignment = 1
+
+[node name="confirmfailurenotification" type="Label" parent="MarginContainer/VSplitContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "確認失敗しました"
+vertical_alignment = 1
+
+[node name="保存" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "セーブ"
+
+[node name="確定" type="Button" parent="MarginContainer/VSplitContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "確定"
+
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer/Button" to="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer/firstnameEdit" method="_random_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer2/Button" to="MarginContainer/VSplitContainer/HBoxContainer/PanelContainer/VBoxContainer/HSplitContainer2/lastnameEdit" method="_random_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer2/カンセル" to="." method="_on_cancel"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer2/保存" to="." method="_on_charaedit_save"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HBoxContainer2/確定" to="." method="_on_confirm"]

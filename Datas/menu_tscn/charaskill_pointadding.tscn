@@ -1,0 +1,295 @@
+[gd_scene load_steps=2 format=3 uid="uid://b34axgpcvtplq"]
+
+[ext_resource type="Script" path="res://Datas/menu_tscn/charaskillpointadding.gd" id="1_n1mn5"]
+
+[node name="角色技能加点" type="VBoxContainer" node_paths=PackedStringArray("UI_points", "UI_dataname", "UI_datalevel", "UI_plusbutton", "UI_subbutton")]
+script = ExtResource("1_n1mn5")
+base_points = 2
+base_datasize = 6
+base_dataname = Array[String](["話術", "仕事", "運動", "性技術", "性能力", "性知識"])
+base_datalevel = Array[int]([0, 0, 0, 0, 0, 0])
+UI_format = "LV %s"
+UI_points = NodePath("HSplitContainer/points")
+UI_dataname = [NodePath("MarginContainer/VBoxContainer/話術/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/仕事/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/運動/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/性技術/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/性能力/HSplitContainer/dataname"), NodePath("MarginContainer/VBoxContainer/性知識/HSplitContainer/dataname")]
+UI_datalevel = [NodePath("MarginContainer/VBoxContainer/話術/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/仕事/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/運動/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/性技術/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/性能力/HSplitContainer/datalevel"), NodePath("MarginContainer/VBoxContainer/性知識/HSplitContainer/datalevel")]
+UI_plusbutton = [NodePath("MarginContainer/VBoxContainer/話術/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/仕事/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/運動/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/性技術/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/性能力/HSplitContainer2/+"), NodePath("MarginContainer/VBoxContainer/性知識/HSplitContainer2/+")]
+UI_subbutton = [NodePath("MarginContainer/VBoxContainer/話術/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/仕事/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/運動/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/性技術/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/性能力/HSplitContainer2/-"), NodePath("MarginContainer/VBoxContainer/性知識/HSplitContainer2/-")]
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+collapsed = true
+dragger_visibility = 1
+
+[node name="skillkind" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+text = "チャラスキル"
+
+[node name="points" type="Label" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "残り：10"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="話術" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/話術"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/話術/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/話術/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/話術"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/話術/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/話術/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="仕事" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/仕事"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/仕事/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/仕事/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/仕事"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/仕事/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/仕事/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="運動" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/運動"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/運動/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/運動/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/運動"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/運動/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/運動/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="性技術" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性技術"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/性技術/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/性技術/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性技術"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/性技術/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/性技術/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="性能力" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性能力"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/性能力/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/性能力/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性能力"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/性能力/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/性能力/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[node name="性知識" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+collapsed = true
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性知識"]
+layout_mode = 2
+size_flags_horizontal = 3
+collapsed = true
+dragger_visibility = 1
+
+[node name="dataname" type="Label" parent="MarginContainer/VBoxContainer/性知識/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "dataname"
+
+[node name="datalevel" type="Label" parent="MarginContainer/VBoxContainer/性知識/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "LV0"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/性知識"]
+layout_mode = 2
+size_flags_horizontal = 8
+collapsed = true
+dragger_visibility = 1
+
+[node name="+" type="Button" parent="MarginContainer/VBoxContainer/性知識/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "+"
+
+[node name="-" type="Button" parent="MarginContainer/VBoxContainer/性知識/HSplitContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/話術/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/話術/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/仕事/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/仕事/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/運動/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/運動/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性技術/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性技術/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性能力/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [4]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性能力/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [4]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性知識/HSplitContainer2/+" to="." method="_on_plus_pressed" binds= [5]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/性知識/HSplitContainer2/-" to="." method="_on_sub_pressed" binds= [5]]
